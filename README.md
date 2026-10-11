@@ -1,50 +1,111 @@
-# Welcome to your Expo app 👋
+# Aora
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aora is a **learning project**: a React Native (Expo) video-sharing app UI inspired by the popular JavaScript Mastery Aora tutorial. It demonstrates file-based routing, NativeWind styling, auth-screen patterns, and a tabbed main experience.
 
-## Get started
+This repository is **UI-focused**. Backend authentication, video uploads, and feeds are not connected yet. Tab screens are intentional placeholders.
 
-1. Install dependencies
+**Author:** [Sohanur Rahman](https://github.com/sohan9542) (`sohan9542`)
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- Onboarding splash with brand imagery and CTA into email auth
+- Sign-in / sign-up screens with client-side form validation
+- Password visibility toggle on form fields
+- Bottom-tab shell (Home, Bookmark, Create, Profile)
+- Search route scaffold (`/search/[query]`)
+- Custom Poppins fonts and a dark primary theme via NativeWind / Tailwind
 
-   ```bash
-    npx expo start
-   ```
+## Tech stack
 
-In the output, you'll find options to open the app in a
+| Area     | Choice                                               |
+| -------- | ---------------------------------------------------- |
+| Runtime  | React Native 0.76, Expo SDK 52                       |
+| Routing  | Expo Router (file-based)                             |
+| Styling  | NativeWind 4 + Tailwind CSS                          |
+| Language | JavaScript / TypeScript (mixed; root layouts in TS)  |
+| Tests    | Jest + jest-expo                                     |
+| Quality  | ESLint (expo + prettier), Prettier, TypeScript check |
+| CI       | GitHub Actions                                       |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Architecture
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/                 Expo Router screens & layouts
+  (auth)/            Sign-in / sign-up stack
+  (tabs)/            Main tab navigator shell
+  search/            Dynamic search route
+  index.tsx          Onboarding entry
+  _layout.tsx        Root stack, fonts, splash
+components/          Reusable UI (button, form field, tab icon)
+constants/           Image & icon asset maps
+lib/                 Pure helpers (form validation)
+assets/              Fonts, icons, marketing images
+__tests__/           Unit tests for core logic
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Navigation flow:
 
-## Learn more
+1. `index` → Continue with Email → `(auth)/sign-in`
+2. Auth stack links between sign-in and sign-up
+3. `(tabs)` hosts the main app shell (placeholders until API work)
+4. `search/[query]` is registered for future search results
 
-To learn more about developing your project with Expo, look at the following resources:
+## Live link
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+No public Expo Go / store / web deployment is published for this repo yet.
 
-## Join the community
+## Local setup
 
-Join our community of developers creating universal apps.
+### Prerequisites
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Node.js 20+
+- npm 10+
+- Expo Go on a device, or iOS Simulator / Android emulator
+
+### Install & run
+
+```bash
+npm install
+npm start
+```
+
+Then press `i` / `a` / `w` for iOS, Android, or web, or scan the QR code with Expo Go.
+
+```bash
+npm run android   # Expo → Android
+npm run ios       # Expo → iOS
+npm run web       # Expo → web
+```
+
+## Environment variables
+
+Copy `.env.example` to `.env` if you later wire a backend (e.g. Appwrite). Names only are documented there; the current UI build does not require env vars to run.
+
+| Variable                                   | Purpose               |
+| ------------------------------------------ | --------------------- |
+| `EXPO_PUBLIC_APPWRITE_ENDPOINT`            | Appwrite API endpoint |
+| `EXPO_PUBLIC_APPWRITE_PROJECT_ID`          | Appwrite project id   |
+| `EXPO_PUBLIC_APPWRITE_DATABASE_ID`         | Database id           |
+| `EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID`  | Users collection      |
+| `EXPO_PUBLIC_APPWRITE_VIDEO_COLLECTION_ID` | Videos collection     |
+| `EXPO_PUBLIC_APPWRITE_STORAGE_ID`          | Storage bucket        |
+
+## Scripts
+
+| Script                 | Description               |
+| ---------------------- | ------------------------- |
+| `npm start`            | Start Expo dev server     |
+| `npm run lint`         | ESLint via `expo lint`    |
+| `npm run format`       | Format with Prettier      |
+| `npm run format:check` | Prettier check (CI)       |
+| `npm test`             | Jest unit tests (CI mode) |
+| `npm run test:watch`   | Jest watch mode           |
+| `npm run typecheck`    | `tsc --noEmit`            |
+
+## Project status / honesty note
+
+Built as a hands-on Expo Router + NativeWind exercise. Expect polished onboarding/auth UI and clear placeholders for home/create/profile/search until a backend is added. Do not treat this as a production app or published product.
+
+## License
+
+No license file is included in this repository. All rights reserved by the author unless otherwise stated.
