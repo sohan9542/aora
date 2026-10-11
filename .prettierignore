@@ -1,0 +1,10 @@
+node_modules
+.expo
+dist
+web-build
+package-lock.json
+*.png
+*.ttf
+*.jpg
+*.jpeg
+*.webp
