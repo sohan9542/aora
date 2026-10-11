@@ -3,7 +3,7 @@ import "../global.css";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
-SplashScreen.preventAutoHideAsync(); 
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
@@ -30,8 +30,7 @@ export default function RootLayout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="/search/[query]" options={{ headerShown: false }} /> */}
-     
+      <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
     </Stack>
   );
 }
