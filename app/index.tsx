@@ -3,7 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
 import { StatusBar } from "expo-status-bar";
-import { Redirect, router } from "expo-router";
+import { router } from "expo-router";
+
 export default function Index() {
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -19,7 +20,7 @@ export default function Index() {
             className="max-w-[380px] w-full h-[300px]"
             resizeMode="contain"
           />
-          <View className=" relative mt-5">
+          <View className="relative mt-5">
             <Text className="text-white font-bold text-3xl text-center">
               Discover Endless possibilities with{" "}
               <Text className="text-secondary-200">Aora</Text>
@@ -28,11 +29,11 @@ export default function Index() {
               source={images.path}
               resizeMode="contain"
               className="w-[136px] h-[15px] absolute -bottom-2 -right-8"
-            ></Image>
+            />
           </View>
           <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where creativity meets innovation: embark on a journy of limitless
-            exploration with Aura
+            Where creativity meets innovation: embark on a journey of limitless
+            exploration with Aora
           </Text>
 
           <CustomButton
@@ -41,12 +42,10 @@ export default function Index() {
               router.push("/sign-in");
             }}
             containerStyles="w-full mt-7"
-            textStyles={undefined}
-            isLoading={undefined}
           />
         </View>
       </ScrollView>
-      <StatusBar backgroundColor={"#161622"} style="light" />
+      <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   );
 }
